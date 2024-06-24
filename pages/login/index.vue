@@ -45,7 +45,7 @@ const submit = async () => {
     if(data){
       const token = data.token
       cookie.value = token
-      return navigateTo("/dashboard/")
+      await navigateTo("/dashboard/")
     }
 
   }catch(error){
