@@ -45,7 +45,9 @@ const submit = async () => {
     if(data){
       const token = data.token
       cookie.value = token
-      await navigateTo("/dashboard/")
+      await navigateTo("https://afiliados.grilo7.bet/dashboard/", {
+        external: true
+      })
     }
 
   }catch(error){
