@@ -6,7 +6,7 @@
 
     <v-app-bar-title>
       <v-row>
-        <v-col cols="1" class="d-none d-sm-flex d-md-none">
+        <v-col cols="1" class="d-md-none">
           <v-icon  @click="dialog = true">mdi-menu</v-icon>
         </v-col>
         <v-col cols="10" md="3">
