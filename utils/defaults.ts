@@ -1,0 +1,23 @@
+import type { DefaultsInstance } from "vuetify";
+
+/**
+ * A few defaults that I like
+ */
+export const defaults: DefaultsInstance = {
+  VAppBar: {
+    elevation: 0,
+  },
+  VBtn: {
+    variant: "flat",
+    height: 50,
+    rounded: "lg",
+    size: "small",
+  },
+  VTextField: {
+    color: "primary",
+    variant: "solo",
+    bgColor: "#303030",
+    rounded: "lg",
+    density: "comfortable",
+  },
+};
