@@ -44,20 +44,23 @@
 
   <navBar />
 </template>
+
 <script setup>
 import Chart1 from "@/components/chart/ch.vue";
 import navBar from "@/components/navbar.vue";
+import { ref } from "vue";
+
 const cookie = useCookie("token");
 const token = cookie.value;
 const xCategoriesRegistros = ref(null);
 const seriesDataRegistros = ref(null);
-const RegistrosTitle = ref(null);
-const ftdTitle = ref(null);
+const RegistrosTitle = ref("Gráfico");
+const ftdTitle = ref("Gráfico");
 const xCategoriesFTD = ref(null);
 const seriesDataFTD = ref(null);
 const xCategoriesVisitas = ref(null);
 const seriesDataVisitas = ref(null);
-const visitasTitle = ref(null);
+const visitasTitle = ref(null); 
 
 const fetchData = async () => {
   try {
@@ -84,6 +87,7 @@ const fetchData = async () => {
         return total + ftds.numeroDeFTDs;
       }, 0);
       ftdTitle.value = `FTDs: ` + totalNumeroFTDs;
+      
       // Visitas
       const visitas = data.dailyVisit;
 
@@ -112,7 +116,7 @@ const fetchData = async () => {
       }, 0);
 
       // Atualizar o título com o total de visitas
-      visitasTitle = `Visitas: ${totalNumeroVisitas}`;
+      visitasTitle.value = `Visitas: ${totalNumeroVisitas}`;
     }
   } catch (error) {
     console.error(error);

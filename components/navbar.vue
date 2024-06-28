@@ -7,10 +7,14 @@
     <v-app-bar-title>
       <v-row>
         <v-col cols="1" class="d-md-none">
-          <v-icon  @click="dialog = true">mdi-menu</v-icon>
+          <v-icon @click="dialog = true">mdi-menu</v-icon>
         </v-col>
         <v-col cols="10" md="3">
-          <v-img class="mt-" src="https://vizzion.bet/storage/logovizzion1.png" width="150"></v-img>
+          <v-img
+            class="ml-6 ml-md-0"
+            src="https://vizzion.bet/storage/logovizzion1.png"
+            width="150"
+          ></v-img>
         </v-col>
       </v-row>
     </v-app-bar-title>
@@ -27,8 +31,13 @@
         </template>
         <v-list nav rounded="xl">
           <v-list-item prepend-icon="mdi-face-agent" title="Suporte"> </v-list-item>
-          <v-list-item prepend-icon="mdi-currency-usd-circle" title="Meu saldo" to="/dashboard/carteira"> </v-list-item>
-          <v-list-item title="Logout" prepend-icon="mdi-logout"> </v-list-item>
+          <v-list-item
+            prepend-icon="mdi-currency-usd-circle"
+            title="Meu saldo"
+            to="/dashboard/carteira"
+          >
+          </v-list-item>
+          <v-list-item title="Logout" @click="logout" prepend-icon="mdi-logout"> </v-list-item>
         </v-list>
       </v-menu>
       <v-chip variant="outlined" class="ma-1">
@@ -51,8 +60,13 @@
         </template>
         <v-list nav rounded="xl">
           <v-list-item prepend-icon="mdi-face-agent" title="Suporte"> </v-list-item>
-          <v-list-item prepend-icon="mdi-currency-usd-circle" title="Meu saldo" to="/dashboard/carteira"> </v-list-item>
-          <v-list-item title="Logout" prepend-icon="mdi-logout"> </v-list-item>
+          <v-list-item
+            prepend-icon="mdi-currency-usd-circle"
+            title="Meu saldo"
+            to="/dashboard/carteira"
+          >
+          </v-list-item>
+          <v-list-item title="Logout" @click="logout" prepend-icon="mdi-logout"> </v-list-item>
         </v-list>
       </v-menu>
     </template>
@@ -78,7 +92,7 @@
           <p class="text-caption text-medium-emphasis mt-n2">Iniciante</p>
         </template>
         <template v-slot:subtitle>
-          <v-chip size="small" color="primary">80% Revshare</v-chip>
+          <v-chip size="small" color="primary">{{planName}}</v-chip>
         </template>
       </v-list-item>
     </v-list>
@@ -163,6 +177,8 @@
           <v-col cols="auto" class="ml-auto">
             <v-btn
               color="white"
+              fab
+              rounded="xl"
               variant="text"
               size="x-large"
               @click="dialog = false"
@@ -192,7 +208,7 @@
                         <p class="text-caption text-medium-emphasis mt-n2">Iniciante</p>
                       </template>
                       <template v-slot:subtitle>
-                        <v-chip size="small" color="primary">80% Revshare</v-chip>
+                        <v-chip size="small" color="primary">{{planName}}</v-chip>
                       </template>
                     </v-list-item>
                   </v-list>
@@ -279,30 +295,51 @@
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
 import { profileStore } from "~/store/profile";
+
 const { mdAndUp } = useDisplay();
 const avatarSize = computed(() => (rail.value ? 30 : 60));
-const deposito = ref(false);
 const dialog = ref(false);
 const drawer = ref(mdAndUp.value);
 const rail = ref(false);
-const pagar = ref(false);
-const cookie = useCookie("token");
-const token = cookie.value;
 const profile = profileStore();
-const indique = ref(false);
-const saque = ref(false);
+const planName = ref(null)
 watch(
   () => mdAndUp.value,
   (newValue) => {
     drawer.value = newValue;
   }
 );
-const bottomnav = ref(null);
 const tab = ref(1);
 const formatCurrency = (value) => {
-  if (typeof value !== 'number') {
-    return 'R$ 0,00';
+  if (typeof value !== "number") {
+    return "R$ 0,00";
   }
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 };
+
+const logout = async () => {
+  try {
+    const cookie = useCookie("token");
+    cookie.value = null;
+    profile.setAuth(false)
+    return navigateTo("/");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const planFetch = async () => {
+  if (profile.affiliate_plan != null) {
+    const planId = profile.affiliate_plan.plan_id;
+    const planNames = {
+      1: 'Apenas CPA',
+      2: 'Apenas RevShare',
+      3: 'CPA+Revshare' 
+    };
+
+    planName.value = planNames[planId] || 'Plano desconhecido'
+  }
+};
+
+planFetch()
 </script>

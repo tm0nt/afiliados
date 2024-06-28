@@ -8,7 +8,12 @@
     <v-card-text>
       <h1 class="text-center text-overline mb-4 text-primary">Faça seu login</h1>
       <v-form @submit.prevent="submit">
-        <v-text-field placeholder="Email" type="email" v-model="email" prepend-inner-icon="mdi-email"></v-text-field>
+        <v-text-field
+          placeholder="Email"
+          type="email"
+          v-model="email"
+          prepend-inner-icon="mdi-email"
+        ></v-text-field>
         <v-text-field
           placeholder="Senha"
           prepend-inner-icon="mdi-password"
@@ -17,6 +22,14 @@
           v-model="password"
           class="mt-n4"
         ></v-text-field>
+        <v-alert
+          :type="alertMessage.type"
+          rounded="xl"
+          v-if="alertMessage.v"
+          variant="tonal"
+          class="mb-4 mt-n2"
+          >{{ alertMessage.text }}</v-alert
+        >
         <v-btn color="primary" block class="text-capitalize" type="submit">Entrar</v-btn>
         <p class="text-caption text-medium-emphasis text-center mt-2">
           <v-icon>mdi-lock</v-icon>&nbsp; Seus dados estão protegidos.
@@ -25,34 +38,56 @@
     </v-card-text>
   </v-card>
   <p class="text-center text-caption my-4 mb-4">Ou</p>
-  <v-btn color="primary" class="mx-auto d-flex text-capitalize" width="400" to="/registro">Crie sua conta</v-btn>
+  <v-btn
+    :rounded="false"
+    color="primary"
+    class="mx-auto d-flex text-capitalize"
+    width="400"
+    href="https://grilo7.bet"
+    >Crie sua conta</v-btn
+  >
 </template>
 
 <script setup>
+import { profileStore } from "~/store/profile";
+
+definePageMeta({
+  middleware: ["login"],
+});
+const storedProfile = profileStore();
 const cookie = useCookie("token");
 const email = ref(null);
 const password = ref(null);
+const alertMessage = ref({
+  v: false,
+  text: null,
+  type: null,
+});
 
 const submit = async () => {
-  try{
+  try {
     const data = await $fetch("https://api.grilo7.bet/auth/login", {
       method: "post",
       body: JSON.stringify({
         email: email.value,
-        password: password.value
-      })
-    })
-    if(data){
-      const token = data.token
-      cookie.value = token
-      await navigateTo("https://afiliados.grilo7.bet/dashboard/", {
-        external: true
-      })
+        password: password.value,
+      }),
+    });
+    if (data) {
+      storedProfile.setAuth(true)
+      alertMessage.value.v = true;
+      alertMessage.value.type = "success";
+      alertMessage.value.text = "Login autorizado!";
+      const token = data.token;
+      cookie.value = token;
+      return navigateTo("http://localhost:3000/dashboard/", {
+        external: true,
+      });
     }
-
-  }catch(error){
-    console.error(error);
+  } catch (error) {
+    alertMessage.value.v = true;
+    alertMessage.value.type = "error";
+    alertMessage.value.text = error.data.error;
   }
 };
-
 </script>

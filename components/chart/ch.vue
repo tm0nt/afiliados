@@ -7,98 +7,105 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
+    default: "Gráfico"
   },
   chartType: {
     type: String,
-    default: 'spline'
+    default: "spline",
   },
   xCategories: {
     type: Array,
-    required: true
+    required: true,
   },
   seriesData: {
     type: Array,
-    required: true
+    required: true,
   },
   seriesName: {
     type: String,
-    default: 'Series'
+    default: "Series",
   },
   yAxisVisible: {
     type: Boolean,
-    default: false
+    default: false,
   },
   markerEnabled: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
+
 });
 
 const chartOptions = computed(() => ({
   chart: {
     type: props.chartType,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   title: {
-    text: ''
+    text: "",
   },
   xAxis: {
-    categories: props.xCategories
+    categories: props.xCategories,
   },
   yAxis: {
     title: {
-      text: ''
+      text: "",
     },
     gridLineWidth: 0,
-    visible: props.yAxisVisible
+    visible: props.yAxisVisible,
   },
   plotOptions: {
     spline: {
       marker: {
         radius: 3,
-        enabled: props.markerEnabled
-      }
+        enabled: props.markerEnabled,
+      },
     },
     line: {
       dataLabels: {
-        enabled: true
+        enabled: true,
       },
       enableMouseTracking: true,
-      color: "primary"
+      color: "primary",
     },
     pie: {
-      borderWidth: 0
-    }
+      borderWidth: 0,
+    },
   },
   legend: {
     itemStyle: {
-      color: '#60dc64'
-    }
+      color: "#60dc64",
+    },
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
   tooltip: {
     enabled: true,
-    formatter: function() {
+    formatter: function () {
       return `<b>${this.series.name}</b><br>${this.x}: ${this.y}`;
-    }
+    },
   },
   dataLabels: {
     style: {
-      color: '#f0f0f0'
-    }
+      color: "#f0f0f0",
+    },
   },
-  series: [{
-    name: props.seriesName,
-    data: props.seriesData,
-    color: "#60dc64"
-  }]
+  series: [
+    {
+      name: props.seriesName,
+      data: props.seriesData,
+      color: "#60dc64",
+    },
+  ],
+  accessibility: {
+    enabled: false,
+  },
 }));
 </script>

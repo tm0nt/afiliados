@@ -11,7 +11,14 @@
           hide-details
           single-line
         ></v-text-field>
-        <v-data-table items-per-page-text="Registros por página" v-if="registros" no-data-text="Nenhum registro encontrado" :search="search" :items="registros" :headers="headers">
+        <v-data-table
+          items-per-page-text="Registros por página"
+          v-if="registros"
+          no-data-text="Nenhum registro encontrado"
+          :search="search"
+          :items="registros"
+          :headers="headers"
+        >
           <template v-slot:item.created_at="{ value }">
             <v-chip>
               {{ formatarData(value) }}
@@ -26,12 +33,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import navBar from "@/components/navbar.vue";
+definePageMeta({
+  middleware: ["auth"],
+});
 const headers = [
   { title: "Nome", key: "name" },
   { title: "Data de registro", key: "created_at" },
 ];
+
 const registros = ref(null);
 const search = ref(null);
 
@@ -61,9 +72,9 @@ const formatarData = (createdAt) => {
   const umDia = 1000 * 60 * 60 * 24; // milissegundos em um dia
 
   if (diff < umDia) {
-    return 'Hoje';
+    return "Hoje";
   } else if (diff < umDia * 2) {
-    return 'há 1 dia';
+    return "há 1 dia";
   } else if (diff < umDia * 7) {
     const dias = Math.floor(diff / umDia);
     return `há ${dias} dias`;

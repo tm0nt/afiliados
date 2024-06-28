@@ -2,13 +2,18 @@ import { defineStore } from "pinia";
 
 export const profileStore = defineStore("profile", {
   state: () => ({
+    id: null,
     nome: null,
     saldo: null,
     auth: false,
     phone: null,
-    code: null
+    code: null,
+    affiliate_plan: false,
   }),
   actions: {
+    setId(id) {
+      this.id = id;
+    },
     setNome(nome) {
       this.nome = nome;
     },
@@ -16,13 +21,16 @@ export const profileStore = defineStore("profile", {
       this.saldo = saldo;
     },
     setAuth(auth) {
-        this.auth = auth;
-      },
+      this.auth = auth;
+    },
     setPhone(phone) {
-        this.phone = phone;
+      this.phone = phone;
     },
     setCode(code) {
-        this.code = code;
+      this.code = code;
+    },
+    setAffiliatePlan(affiliate_plan) {
+      this.affiliate_plan = affiliate_plan;
     },
   },
 });
