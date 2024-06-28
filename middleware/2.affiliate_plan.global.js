@@ -14,7 +14,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         }
       });
 
-      if (data) {
+      if (data.lenght != 0) {
         storedProfile.setAffiliatePlan(data[0]);
       }
     } catch (error) {
