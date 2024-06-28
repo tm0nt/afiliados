@@ -2,7 +2,7 @@
   <v-container>
     <VRow>
       <VCol cols="12" md="4">
-        <VCard rounded="xl" color="#101010">
+        <VCard rounded="xl" color="surface">
           <template v-slot:title>
             <p class="text-subtitle-1 text-medium-emphasis">CPA</p>
           </template>
@@ -12,7 +12,7 @@
         </VCard>
       </VCol>
       <VCol cols="12" md="4">
-        <VCard rounded="xl" color="#101010">
+        <VCard rounded="xl" color="surface">
           <template v-slot:title>
             <p class="text-subtitle-1 text-medium-emphasis">FTDs</p>
           </template>
@@ -22,7 +22,7 @@
         </VCard>
       </VCol>
       <VCol cols="12" md="4">
-        <VCard rounded="xl" color="#101010">
+        <VCard rounded="xl" color="surface">
           <template v-slot:title>
             <p class="text-subtitle-1 text-medium-emphasis">RevShare</p>
           </template>
@@ -35,6 +35,11 @@
         <VDataTable :headers="headers" no-data-text="Nenhum dado para exibir" :items="items" items-per-page-text="Dados por página">
           <template v-slot:item.data="{item}">
             <p>{{ formatISODate(item.data) }}</p>
+          </template>
+          <template v-slot:top>
+            <v-toolbar rounded="sm" color="surface" flat>
+              <v-toolbar-title>Relatório</v-toolbar-title>
+            </v-toolbar>
           </template>
         </VDataTable>
       </VCol>

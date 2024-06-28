@@ -1,12 +1,12 @@
 <template>
   <v-img
-    src="https://vizzion.bet/storage/logovizzion1.png"
+    src="https://grilo7.bet/storage/logo.png"
     class="mx-auto my-12"
-    width="150"
+    width="180"
   ></v-img>
-  <v-card class="mx-auto pa-12 pb-12" color="#151515" rounded="xl" elevation="8" width="400">
+  <v-card class="mx-auto pa-12 pb-12" color="transparent" rounded="xl" flat elevation="0" width="400">
     <v-card-text>
-      <h1 class="text-center text-overline mb-4 text-primary">Faça seu login</h1>
+      <h1 class="text-center text-subtitle-1  mb-4">Faça seu login</h1>
       <v-form @submit.prevent="submit">
         <v-text-field
           placeholder="Email"
@@ -16,9 +16,10 @@
         ></v-text-field>
         <v-text-field
           placeholder="Senha"
+          :type="show1 ? 'text' : 'password'"
           prepend-inner-icon="mdi-password"
-          type="password"
-          append-inner-icon="mdi-eye"
+          :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append-inner="show1 = !show1"
           v-model="password"
           class="mt-n4"
         ></v-text-field>
@@ -35,17 +36,20 @@
           <v-icon>mdi-lock</v-icon>&nbsp; Seus dados estão protegidos.
         </p>
       </v-form>
-    </v-card-text>
-  </v-card>
-  <p class="text-center text-caption my-4 mb-4">Ou</p>
-  <v-btn
-    :rounded="false"
+      <p class="text-center text-caption my-4 mb-4">Ou</p>
+
+      <v-btn
     color="primary"
     class="mx-auto d-flex text-capitalize"
     width="400"
+    variant="outlined"
+    rounded="xl"
     href="https://grilo7.bet"
     >Crie sua conta</v-btn
   >
+    </v-card-text>
+  </v-card>
+
 </template>
 
 <script setup>
@@ -57,6 +61,7 @@ definePageMeta({
 const storedProfile = profileStore();
 const cookie = useCookie("token");
 const email = ref(null);
+const show1 = ref(false)
 const password = ref(null);
 const alertMessage = ref({
   v: false,
@@ -80,7 +85,7 @@ const submit = async () => {
       alertMessage.value.text = "Login autorizado!";
       const token = data.token;
       cookie.value = token;
-      return navigateTo("http://localhost:3000/dashboard/", {
+      return navigateTo("https://grilo7.bet/dashboard/", {
         external: true,
       });
     }

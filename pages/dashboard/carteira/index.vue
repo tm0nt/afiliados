@@ -26,7 +26,7 @@
             </VAlert>
           </VCardText>
         </VCard>
-        <VCard color="#101010" rounded="xl" class="mb-4">
+        <VCard color="surface" rounded="xl" class="mb-4">
           <template v-slot:title>
             <p class="text-subtitle-1 text-medium-emphasis">Comissões acumuladas</p>
           </template>
@@ -34,7 +34,7 @@
             <h1 class="font-weight-bold">R$ 0,00</h1>
           </template>
         </VCard>
-        <VCard rounded="xl" color="#101010">
+        <VCard rounded="xl" color="surface">
           <template v-slot:title>
             <p class="text-subtitle-1 text-medium-emphasis">Pagamentos já recebidos</p>
           </template>
@@ -51,7 +51,7 @@
           items-per-page-text="Saques por página"
         >
           <template v-slot:top>
-            <v-toolbar rounded="sm" color="#080808" flat>
+            <v-toolbar rounded="sm" color="surface" flat>
               <v-toolbar-title>Saques solicitados</v-toolbar-title>
             </v-toolbar>
           </template>
@@ -201,7 +201,7 @@ const submit = async () => {
       snackbar.value.v = true;
       snackbar.value.color = "success";
       snackbar.value.text = "Saque solicitado!";
-      return navigateTo("http://localhost:3000/dashboard/carteira", {
+      return navigateTo("https://grilo7.bet/dashboard/carteira", {
         external: true,
       });
     }

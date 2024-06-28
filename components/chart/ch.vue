@@ -1,5 +1,5 @@
 <template>
-  <VCard rounded="xl" color="#101010" variant="elevated">
+  <VCard rounded="xl" color="surface" variant="elevated">
     <VCardTitle class="text-caption ma-2">{{ title }}</VCardTitle>
     <v-divider></v-divider>
     <highchart class="mt-2" :options="chartOptions" />
@@ -80,7 +80,7 @@ const chartOptions = computed(() => ({
   },
   legend: {
     itemStyle: {
-      color: "#60dc64",
+      color: "#00d500",
     },
   },
   credits: {
@@ -101,7 +101,7 @@ const chartOptions = computed(() => ({
     {
       name: props.seriesName,
       data: props.seriesData,
-      color: "#60dc64",
+      color: "#00d500",
     },
   ],
   accessibility: {

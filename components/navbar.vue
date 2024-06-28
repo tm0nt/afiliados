@@ -12,8 +12,8 @@
         <v-col cols="10" md="3">
           <v-img
             class="ml-6 ml-md-0"
-            src="https://vizzion.bet/storage/logovizzion1.png"
-            width="150"
+            src="https://grilo7.bet/storage/logo.png"
+            width="120"
           ></v-img>
         </v-col>
       </v-row>
@@ -83,7 +83,7 @@
         <template v-slot:prepend>
           <v-avatar
             :size="avatarSize"
-            image="https://img.freepik.com/fotos-premium/astronauta-dos-desenhos-animados-hd-8k-papel-de-parede-banco-de-imagem-fotografica_1030895-6756.jpg?size=626&ext=jpg"
+            image="https://i.imgur.com/cSNtckz.png"
           >
           </v-avatar>
         </template>
@@ -100,7 +100,6 @@
     <v-divider></v-divider>
 
     <v-list nav>
-      <v-list-subheader v-if="!rail">MENU</v-list-subheader>
       <v-list-item
         rounded="xl"
         to="/dashboard/"
@@ -146,9 +145,9 @@
       ></v-list-item>
       <v-list-item
         rounded="xl"
-        title="Detalhes da conta"
+        title="Links de divulgação"
         prepend-icon="mdi-account"
-        to="/dashboard/usuario"
+        to="/dashboard/divulgacao"
         value="conta"
       ></v-list-item>
       <v-list-item
@@ -199,7 +198,7 @@
                       <template v-slot:prepend>
                         <v-avatar
                           :size="avatarSize"
-                          image="https://img.freepik.com/fotos-premium/astronauta-dos-desenhos-animados-hd-8k-papel-de-parede-banco-de-imagem-fotografica_1030895-6756.jpg?size=626&ext=jpg"
+                          image="https://i.imgur.com/cSNtckz.png"
                         >
                         </v-avatar>
                       </template>
@@ -215,7 +214,6 @@
                 </v-col>
                 <v-col cols="12">
                   <v-list nav>
-                    <v-list-subheader v-if="!rail">MENU</v-list-subheader>
                     <v-list-item
                       rounded="xl"
                       to="/dashboard/"
@@ -261,8 +259,8 @@
                     ></v-list-item>
                     <v-list-item
                       rounded="xl"
-                      title="Detalhes da conta"
-                      to="/dashboard/usuario"
+                      title="Links de divulgação"
+                      to="/dashboard/divulgacao"
                       prepend-icon="mdi-account"
                       value="conta"
                     ></v-list-item>

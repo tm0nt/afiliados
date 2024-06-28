@@ -2,7 +2,7 @@
   <v-container>
     <VRow>
       <VCol cols="12" md="12">
-        <VCard rounded="xl" color="#101010" title="Mídia de divulgação">
+        <VCard rounded="xl" color="surface" title="Mídia de divulgação">
           <VRow class="ma-10">
             <VCol cols="6" md="2">
               <VCard

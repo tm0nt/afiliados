@@ -2,8 +2,11 @@
   <div>
     <NuxtPwaAssets />
     <NuxtLayout>
+
       <NuxtPage />
+
     </NuxtLayout>
+    
     <VDialog v-model="dialog" width="600" color="background" persistent>
       <VCard rounded="xl" >
         <VCardTitle>
@@ -28,6 +31,7 @@
       </VCard>
     </VDialog>
     <VSnackbar v-model="snackbar" color="success" rounded="xl">Plano selecionado com sucesso!</VSnackbar>
+
   </div>
 </template>
 <script setup>

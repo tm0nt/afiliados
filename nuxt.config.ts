@@ -1,12 +1,12 @@
 import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 // PWA Config
-const title = "Sistema de afiliados";
-const shortTitle = "Sistema de afiliados";
-const description = "";
-const image = "";
-const url = "https://quantumsoftwares.com.br";
-const themeColor = "#0043ff";
+const title = "Afiliados | GriloBet";
+const shortTitle = "Afiliados | GriloBet";
+const description = "Seja um parceiro oficial da GriloBet. Aqui você é sócio majoritário. Junte-se a +20.000 afiliados e desfrute da maior comissão do mercado";
+const image = "https://i.imgur.com/EqVbMR4.png";
+const url = "https://afiliados.grilo7.bet";
+const themeColor = "#00d223";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -38,8 +38,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Sistema de afiliados",
-      titleTemplate: "%s | Sistema de afiliados",
+      title: "Afiliados | GriloBet",
+      titleTemplate: "%s",
       link: [
         { rel: "stylesheet", href: "https://rsms.me/inter/inter.css" },
         { rel: "preconnect", href: "https://rsms.me/" },
@@ -113,7 +113,7 @@ export default defineNuxtConfig({
       description: description,
       theme_color: themeColor,
       lang: "pt-br",
-      background_color: "#0043ff",
+      background_color: "#00d223",
     },
   },
 });

@@ -2,10 +2,10 @@
   <v-container>
     <VRow>
       <VCol cols="12">
-        <h1 class="text-h5 font-weight-bold mb-10">Registros</h1>
         <v-text-field
           v-model="search"
           label="Pesquise"
+          rounded="lg"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           hide-details
@@ -19,6 +19,11 @@
           :items="registros"
           :headers="headers"
         >
+        <template v-slot:top>
+            <v-toolbar rounded="sm" color="surface" flat>
+              <v-toolbar-title>Registros</v-toolbar-title>
+            </v-toolbar>
+          </template>
           <template v-slot:item.created_at="{ value }">
             <v-chip>
               {{ formatarData(value) }}

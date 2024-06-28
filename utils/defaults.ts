@@ -10,14 +10,14 @@ export const defaults: DefaultsInstance = {
   VBtn: {
     variant: "flat",
     height: 50,
-    rounded: "lg",
+    rounded: "xl",
     size: "small",
   },
   VTextField: {
     color: "primary",
     variant: "solo",
     bgColor: "#303030",
-    rounded: "lg",
+    rounded: "xl",
     density: "comfortable",
   },
 };
