@@ -14,7 +14,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         }
       });
 
-      if (data.lenght != 0) {
+      // Verifique se o array 'data' está vazio
+      if (Array.isArray(data) && data.length === 0) {
+        storedProfile.setAffiliatePlan(false); // ou qualquer valor padrão desejado
+      } else {
         storedProfile.setAffiliatePlan(data[0]);
       }
     } catch (error) {

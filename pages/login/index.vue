@@ -85,7 +85,7 @@ const submit = async () => {
       alertMessage.value.text = "Login autorizado!";
       const token = data.token;
       cookie.value = token;
-      return navigateTo("https://grilo7.bet/dashboard/", {
+      return navigateTo("https://afiliados.grilo7.bet/dashboard/", {
         external: true,
       });
     }

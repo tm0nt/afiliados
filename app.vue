@@ -56,7 +56,7 @@ const insertPlanAffiliate = async (id) => {
     if(data){
       snackbar.value = true
       dialog.value = false
-      return navigateTo("http://localhost:3000/dashboard",{
+      return navigateTo("https://afiliados.grilo7.bet/dashboard",{
         external: true
       })
     }

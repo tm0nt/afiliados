@@ -31,7 +31,7 @@
             <p class="text-subtitle-1 text-medium-emphasis">Comissões acumuladas</p>
           </template>
           <template v-slot:subtitle>
-            <h1 class="font-weight-bold">R$ 0,00</h1>
+            <h1 class="font-weight-bold">R$ {{ comission?.cpa + comission?.revshare }}</h1>
           </template>
         </VCard>
         <VCard rounded="xl" color="surface">
@@ -201,7 +201,7 @@ const submit = async () => {
       snackbar.value.v = true;
       snackbar.value.color = "success";
       snackbar.value.text = "Saque solicitado!";
-      return navigateTo("https://grilo7.bet/dashboard/carteira", {
+      return navigateTo("https://afiliados.grilo7.bet/dashboard/carteira", {
         external: true,
       });
     }
@@ -261,7 +261,23 @@ function getStatusText(status) {
       return "Desconhecido";
   }
 }
+const comission = ref(null)
 
+
+const comissionFetch = async () => {
+  try{
+    const data = await $fetch("https://api.grilo7.bet/comission", {
+      headers:{
+        "Authorization":`Bearer ${token}`
+      }
+    })
+    if(data){
+      comission.value = data
+    }
+  }catch(error){
+    console.error(error)
+  }
+};
 function formatISODate(isoString) {
   const date = new Date(isoString);
 
@@ -280,4 +296,5 @@ const formatCurrency = (value) => {
 };
 
 fetchData();
+comissionFetch();
 </script>
