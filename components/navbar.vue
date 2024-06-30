@@ -169,8 +169,8 @@
           <v-col cols="auto">
             <v-img
               class="mt-4"
-              src="https://vizzion.bet/storage/logovizzion1.png"
-              width="140"
+              src="https://grilo7.bet/storage/logo.png"
+              width="120"
             ></v-img>
           </v-col>
           <v-col cols="auto" class="ml-auto">
