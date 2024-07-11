@@ -12,7 +12,7 @@
         <v-col cols="10" md="3">
           <v-img
             class="ml-6 ml-md-0"
-            src="https://grilo7.bet/storage/logo.png"
+            src="https://grilo7.bet/storage/webp.png"
             width="120"
           ></v-img>
         </v-col>
@@ -330,12 +330,11 @@ const planFetch = async () => {
   if (profile.affiliate_plan != null) {
     const planId = profile.affiliate_plan.plan_id;
     const planNames = {
-      1: 'Apenas CPA',
-      2: 'Apenas RevShare',
-      3: 'CPA+Revshare' 
+      1: 'RevShare(70%)',
+      2: 'Rev+CPA(30%+50/50)' 
     };
 
-    planName.value = planNames[planId] || 'Plano desconhecido'
+    planName.value = planNames[planId] || 'Sem plano'
   }
 };
 

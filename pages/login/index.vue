@@ -1,6 +1,6 @@
 <template>
   <v-img
-    src="https://grilo7.bet/storage/logo.png"
+    src="https://grilo7.bet/storage/logo.webp"
     class="mx-auto my-12"
     width="180"
   ></v-img>

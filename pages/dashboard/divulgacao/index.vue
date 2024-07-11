@@ -47,7 +47,7 @@ const items = ref([
   {
     id: "Seu link de indicação",
     name: profile.name,
-    link: `https://grilo7.bet/ref=${profile.code}`,
+    link: `https://grilo7.bet?ref=${profile.code}`,
   },
 ]);
 
