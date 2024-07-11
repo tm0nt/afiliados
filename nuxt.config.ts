@@ -46,6 +46,7 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: url },
       ],
+      script: [{src: "https://js-na1.hs-scripts.com/46743241.js"}],
       meta: [
         {
           hid: "description",
