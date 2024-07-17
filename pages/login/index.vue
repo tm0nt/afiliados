@@ -44,7 +44,7 @@
         <p class="text-caption text-medium-emphasis text-center mb-2">
           <v-icon>mdi-lock</v-icon>&nbsp; Seus dados estão protegidos.
         </p>
-        <v-btn :loading="loading" color="primary" block class="text-capitalize" type="submit">Entrar</v-btn>
+        <v-btn :loading="loading" color="primary" block class="text-white text-capitalize" type="submit">Entrar</v-btn>
 
       </v-form>
       <v-btn

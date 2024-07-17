@@ -56,7 +56,7 @@
                 class="mb-4 mt-n2"
                 >{{ alertMessage.text }}</v-alert
               >
-              <v-btn color="primary" :loading="loading" block class="text-capitalize" type="submit">Cadastrar</v-btn>
+              <v-btn color="primary" :loading="loading" block class="text-capitalize text-white" type="submit">Cadastrar</v-btn>
             </v-form>
 
             <v-btn

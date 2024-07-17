@@ -19,7 +19,7 @@
           </template>
 
           <template v-slot:item.action="{ item }">
-            <v-btn size="x-small" append-icon="mdi-content-copy" color="primary" rounded="xl" @click="copyToClipboard(item.link)">
+            <v-btn size="x-small" append-icon="mdi-content-copy" color="primary" class="text-white" rounded="xl" @click="copyToClipboard(item.link)">
               Copiar
             </v-btn>
           </template>
