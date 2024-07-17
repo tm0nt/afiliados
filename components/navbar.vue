@@ -50,11 +50,12 @@
       <v-menu transition="slide-y-transition">
         <template v-slot:activator="{ props }">
           <v-btn
-            icon="mdi-account"
-            variant="outlined"
+            icon="mdi-account-circle"
+            variant="text"
             fab
-            rounded="xl"
-            class="d-md-none ma-1"
+            size="large"
+            rounded="text"
+            class="d-md-none ma-1 ml-n3"
             v-bind="props"
           ></v-btn>
         </template>
