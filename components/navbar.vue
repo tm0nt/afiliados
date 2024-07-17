@@ -11,9 +11,9 @@
         </v-col>
         <v-col cols="10" md="3">
           <v-img
-            class="ml-6 ml-md-0"
+            class="ml-2 mt-1 ml-md-0"
             src="https://grilo7.bet/storage/logo.webp"
-            width="120"
+            max-width="120"
           ></v-img>
         </v-col>
       </v-row>
