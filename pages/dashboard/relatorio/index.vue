@@ -115,11 +115,12 @@ function formatISODate(isoString) {
 }
 
 // Função para formatar números em moeda BRL
+
 const formatCurrency = (value) => {
   if (typeof value !== "number") {
     return "R$ 0,00";
   }
-  return `R$ ${value.toFixed(2).replace(".", ",")}`;
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 };
 
 fetchData();
