@@ -2,6 +2,6 @@
 </template>
 <script setup>
 
-return navigateTo("/login")
+navigateTo("/login")
 
 </script>

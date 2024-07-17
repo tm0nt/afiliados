@@ -41,7 +41,7 @@ const dialog = ref(false)
 const snackbar = ref(false)
 const insertPlanAffiliate = async (id) => {
   try{
-    const data = await $fetch("https://api.grilo7.bet/affiliate_config", {
+    const data = await $fetch("https://api.grilo7.bet/api/data", {
       method: "post",
       headers:{
         "Authorization":`Bearer ${token}`

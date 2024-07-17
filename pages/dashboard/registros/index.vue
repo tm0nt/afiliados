@@ -24,7 +24,7 @@
               <v-toolbar-title>Registros</v-toolbar-title>
             </v-toolbar>
           </template>
-          <template v-slot:item.created_at="{ value }">
+          <template v-slot:item.createdAt="{ value }">
             <v-chip>
               {{ formatarData(value) }}
             </v-chip>
@@ -44,8 +44,8 @@ definePageMeta({
   middleware: ["auth"],
 });
 const headers = [
-  { title: "Nome", key: "name" },
-  { title: "Data de registro", key: "created_at" },
+  { title: "E-mail", key: "indicated" },
+  { title: "Data de registro", key: "createdAt" },
 ];
 
 const registros = ref(null);
@@ -56,13 +56,13 @@ const token = cookie.value;
 
 const fetchData = async () => {
   try {
-    const data = await $fetch("https://api.grilo7.bet/registros", {
+    const data = await $fetch("https://api.grilo7.bet/api/data/registers", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     if (data) {
-      registros.value = data.detalhes;
+      registros.value = data?.register;
     }
   } catch (error) {
     console.error(error);

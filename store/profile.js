@@ -9,6 +9,7 @@ export const profileStore = defineStore("profile", {
     phone: null,
     code: null,
     affiliate_plan: false,
+    avatar: null,
   }),
   actions: {
     setId(id) {
@@ -28,6 +29,9 @@ export const profileStore = defineStore("profile", {
     },
     setCode(code) {
       this.code = code;
+    },
+    setAvatar(avatar) {
+      this.avatar = avatar;
     },
     setAffiliatePlan(affiliate_plan) {
       this.affiliate_plan = affiliate_plan;

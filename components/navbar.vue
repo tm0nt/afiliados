@@ -12,7 +12,7 @@
         <v-col cols="10" md="3">
           <v-img
             class="ml-6 ml-md-0"
-            src="https://grilo7.bet/storage/webp.png"
+            src="https://grilo7.bet/storage/logo.webp"
             width="120"
           ></v-img>
         </v-col>
@@ -83,7 +83,7 @@
         <template v-slot:prepend>
           <v-avatar
             :size="avatarSize"
-            image="https://i.imgur.com/cSNtckz.png"
+            :image="profile?.avatar"
           >
           </v-avatar>
         </template>
@@ -198,7 +198,7 @@
                       <template v-slot:prepend>
                         <v-avatar
                           :size="avatarSize"
-                          image="https://i.imgur.com/cSNtckz.png"
+                          :image="profile?.avatar"
                         >
                         </v-avatar>
                       </template>
@@ -327,11 +327,12 @@ const logout = async () => {
 };
 
 const planFetch = async () => {
-  if (profile.affiliate_plan != null) {
-    const planId = profile.affiliate_plan.plan_id;
+  if (profile?.affiliate_plan != null) {
+    const planId = profile?.affiliate_plan;
     const planNames = {
-      1: 'RevShare(70%)',
-      2: 'Rev+CPA(30%+50/50)' 
+      1: 'CPA(20/15)',
+      2: 'Revshare(80%)',
+      3: 'CPA+Rev(50/50+30%)'
     };
 
     planName.value = planNames[planId] || 'Sem plano'

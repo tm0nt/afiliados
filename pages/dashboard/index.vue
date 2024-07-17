@@ -27,7 +27,19 @@
       </VCol>
     </VRow>
     <VRow>
-      <VCol cols="12" md="12">
+      <VCol cols="12" md="6">
+        <Chart1
+          :title="qftdTitle"
+          chartType="spline"
+          v-if="xCategoriasQFTD && seriesDataQFTD"
+          :xCategories="xCategoriasQFTD"
+          :seriesData="seriesDataQFTD"
+          seriesName="qFTD"
+          :yAxisVisible="false"
+          :markerEnabled="false"
+        />
+      </VCol>
+      <VCol cols="12" md="6">
         <Chart1
           :title="visitasTitle"
           chartType="spline"
@@ -58,70 +70,86 @@ const RegistrosTitle = ref("Gráfico");
 const ftdTitle = ref("Gráfico");
 const xCategoriesFTD = ref(null);
 const seriesDataFTD = ref(null);
+const xCategoriasQFTD = ref(null);
+const seriesDataQFTD = ref(null);
 const xCategoriesVisitas = ref(null);
+const qftdTitle = ref(null);
 const seriesDataVisitas = ref(null);
-const visitasTitle = ref(null); 
+const visitasTitle = ref(null);
 
-const fetchData = async () => {
+const fetchDataFTD = async () => {
   try {
-    const data = await $fetch("https://api.grilo7.bet/", {
+    const data = await $fetch("https://api.grilo7.bet/api/data/chart/ftd", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     if (data) {
-      // Registros
-      const registros = data.registros;
-      xCategoriesRegistros.value = registros.map((item) => item.createdAt);
-      seriesDataRegistros.value = registros.map((item) => item.numeroDeRegistros);
-      const totalNumeroDeRegistros = registros.reduce((total, registro) => {
-        return total + registro.numeroDeRegistros;
-      }, 0);
-      RegistrosTitle.value = `Registros: ` + totalNumeroDeRegistros;
-
-      // FTDs
-      const ftd = data.FTDs;
-      xCategoriesFTD.value = ftd.map((item) => item.createdAt);
-      seriesDataFTD.value = ftd.map((item) => item.numeroDeFTDs);
-      const totalNumeroFTDs = ftd.reduce((total, ftds) => {
-        return total + ftds.numeroDeFTDs;
-      }, 0);
-      ftdTitle.value = `FTDs: ` + totalNumeroFTDs;
-      
-      // Visitas
-      const visitas = data.dailyVisit;
-
-      const datasUnicas = Array.from(
-        new Set(visitas.map((item) => new Date(item.visit_date).toISOString().split("T")[0]))
-      );
-      datasUnicas.sort();
-      xCategoriesVisitas.value = datasUnicas;
-
-      // Contar o número de visitas por data
-      const visitasPorData = {};
-      for (const visita of visitas) {
-        const dataVisita = new Date(visita.visit_date).toISOString().split("T")[0];
-        if (!visitasPorData[dataVisita]) {
-          visitasPorData[dataVisita] = 0;
-        }
-        visitasPorData[dataVisita]++;
-      }
-
-      // Mapear os valores da série (quantidade de visitas por dia)
-      seriesDataVisitas.value = Object.values(visitasPorData);
-
-      // Calcular o total de visitas
-      const totalNumeroVisitas = visitas.reduce((total, visita) => {
-        return total + 1; // Conta cada visita individualmente
-      }, 0);
-
-      // Atualizar o título com o total de visitas
-      visitasTitle.value = `Visitas: ${totalNumeroVisitas}`;
+      xCategoriesFTD.value = Object.keys(data).sort();
+      seriesDataFTD.value = xCategoriesFTD.value.map((date) => data[date]);
+      const totalNumeroFTDs = seriesDataFTD.value.reduce((total, numFTDs) => total + numFTDs, 0);
+      ftdTitle.value = `FTDs: ${totalNumeroFTDs}`;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+const fetchDataQFTD = async () => {
+  try {
+    const data = await $fetch("https://api.grilo7.bet/api/data/chart/qftd", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (data) {
+      xCategoriasQFTD.value = Object.keys(data).sort();
+      seriesDataQFTD.value = xCategoriasQFTD.value.map((date) => data[date]);
+      const totalNumeroFTDs = seriesDataQFTD.value.reduce((total, numFTDs) => total + numFTDs, 0);
+      qftdTitle.value = `QFTDs: ${totalNumeroFTDs}`;
     }
   } catch (error) {
     console.error(error);
   }
 };
 
-fetchData();
+const fetchDataVisit = async () => {
+  try {
+    const data = await $fetch("https://api.grilo7.bet/api/data/chart/visit", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (data) {
+      xCategoriesVisitas.value = Object.keys(data).sort();
+      seriesDataVisitas.value = xCategoriesVisitas.value.map((date) => data[date]);
+      const totalVisitas = seriesDataVisitas.value.reduce((total, numFTDs) => total + numFTDs, 0);
+      visitasTitle.value = `Visitas: ${totalVisitas}`;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const fetchDataRegister = async () => {
+  try {
+    const data = await $fetch("https://api.grilo7.bet/api/data/chart/register", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (data) {
+      xCategoriesRegistros.value = Object.keys(data).sort();
+      seriesDataRegistros.value = xCategoriesRegistros.value.map((date) => data[date]);
+      const totalVisitas = seriesDataRegistros.value.reduce((total, numFTDs) => total + numFTDs, 0);
+      RegistrosTitle.value = `Registros: ${totalVisitas}`;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+fetchDataFTD();
+fetchDataVisit();
+fetchDataRegister();
+fetchDataQFTD();
 </script>

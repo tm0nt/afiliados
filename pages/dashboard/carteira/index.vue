@@ -31,7 +31,7 @@
             <p class="text-subtitle-1 text-medium-emphasis">Comissões acumuladas</p>
           </template>
           <template v-slot:subtitle>
-            <h1 class="font-weight-bold">R$ {{ comission?.cpa + comission?.revshare }}</h1>
+            <h1 class="font-weight-bold">{{ formatCurrency(comission?.CPA + comission?.Revshare) }}</h1>
           </template>
         </VCard>
         <VCard rounded="xl" color="surface">
@@ -55,11 +55,14 @@
               <v-toolbar-title>Saques solicitados</v-toolbar-title>
             </v-toolbar>
           </template>
-          <template v-slot:item.date="{ value }">
+          <template v-slot:item.createdAt="{ value }">
             <p>{{ formatISODate(value) }}</p>
           </template>
           <template v-slot:item.amount="{ value }">
             <p>{{ formatCurrency(value) }}</p>
+          </template>
+          <template v-slot:item.keyType="{ value }">
+            <p class="text-capitalize">{{ (value) }}</p>
           </template>
           <template v-slot:item.status="{ item }">
             <v-chip
@@ -143,9 +146,10 @@ const snackbar = ref({
 });
 
 const headers = [
-  { title: "Data", key: "date" },
+  { title: "Data", key: "createdAt" },
   { title: "Valor", key: "amount" },
-  { title: "Chave", key: "pix" },
+  { title: "Tipo da chave", key: "keyType" },
+  { title: "Chave", key: "keyValue" },
   { title: "Status", key: "status" },
 ];
 
@@ -185,14 +189,14 @@ const submit = async () => {
       alertMessage.value.text = "Preencha todos os campos!";
       return;
     }
-    const data = await $fetch("https://api.grilo7.bet/withdraw", {
+    const data = await $fetch("https://api.grilo7.bet/api/users/withdraw", {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        type: chaves.value,
-        pix: chave.value,
+        keyType: chaves.value,
+        keyValue: chave.value,
         amount: valorSaque.value,
       }),
     });
@@ -214,14 +218,14 @@ const submit = async () => {
 
 const fetchData = async () => {
   try {
-    const data = await $fetch("https://api.grilo7.bet/withdraw", {
+    const data = await $fetch("https://api.grilo7.bet/api/data/withdraw", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     if (data) {
-      items.value = data;
-      totalAmountWithStatusApproved.value = calculateSumWithStatus(items.value, 1);
+      items.value = data?.withdraws;
+      totalAmountWithStatusApproved.value = data?.totalAmountPaid;
     }
   } catch (error) {
     //
@@ -230,19 +234,14 @@ const fetchData = async () => {
 
 const totalAmountWithStatusApproved = ref(null);
 
-const calculateSumWithStatus = (items, status) => {
-  return items.reduce((total, item) => {
-    return item.status === status ? total + item.amount : total;
-  }, 0);
-};
 
 function getStatusColor(status) {
   switch (status) {
-    case 1:
+    case "paid":
       return "green";
-    case 422:
+    case "reject":
       return "red";
-    case 16:
+    case "not_paid":
       return "yellow";
     default:
       return "grey";
@@ -251,11 +250,11 @@ function getStatusColor(status) {
 
 function getStatusText(status) {
   switch (status) {
-    case 1:
+    case "paid":
       return "Aprovado";
-    case 422:
+    case "reject":
       return "Rejeitado";
-    case 16:
+    case "not_paid":
       return "Aguardando";
     default:
       return "Desconhecido";
@@ -266,7 +265,7 @@ const comission = ref(null)
 
 const comissionFetch = async () => {
   try{
-    const data = await $fetch("https://api.grilo7.bet/comission", {
+    const data = await $fetch("https://api.grilo7.bet/api/data/comission", {
       headers:{
         "Authorization":`Bearer ${token}`
       }
