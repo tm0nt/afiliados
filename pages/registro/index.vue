@@ -7,12 +7,12 @@
       <v-col cols="12" md="6">
         <v-img src="https://grilo7.bet/storage/logo.webp" class="mx-auto my-2" width="180"></v-img>
         <v-card
-          class="mx-auto pa-12 pb-12"
+          class="mx-auto"
           color="transparent"
           rounded="xl"
           flat
           elevation="0"
-          width="400"
+          max-width="400"
         >
           <v-card-text>
             <h1 class="text-center text-subtitle-1 mb-4">Faça seu cadastro</h1>
@@ -61,8 +61,8 @@
 
             <v-btn
               color="primary"
-              class="mx-auto mt-2 d-flex text-capitalize"
-              width="400"
+              class="mx-auto mt-2  text-capitalize"
+              block
               variant="outlined"
               rounded="xl"
               to="/login"
