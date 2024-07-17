@@ -62,6 +62,10 @@ import Chart1 from "@/components/chart/ch.vue";
 import navBar from "@/components/navbar.vue";
 import { ref } from "vue";
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 const cookie = useCookie("token");
 const token = cookie.value;
 const xCategoriesRegistros = ref(null);
